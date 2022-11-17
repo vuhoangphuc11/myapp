@@ -35,14 +35,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/oauth2/**", "/login/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .formLogin().permitAll()
+                    .loginPage("/app/login")
+                .and()
                 .oauth2Login()
+                .loginPage("/app/login/login")
                 .userInfoEndpoint()
                 .userService(oauth2UserService)
                 .and()
                 .successHandler(oauthLoginSuccessHandler)
-                .defaultSuccessUrl("/home");
+                .and()
+                .logout().logoutSuccessUrl("/app/logout").permitAll();
 
     }
+
+
 
     @Autowired
     private CustomOAuth2UserService oauth2UserService;
