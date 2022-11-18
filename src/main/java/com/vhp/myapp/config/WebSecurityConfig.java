@@ -22,34 +22,27 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/oauth2/**", "/login/**").permitAll()
-                .anyRequest().authenticated()
+                    .antMatchers("/oauth2/**", "/login/**").permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                    .formLogin().permitAll()
                     .loginPage("/app/login")
                 .and()
-                .oauth2Login()
-                .loginPage("/app/login/login")
-                .userInfoEndpoint()
-                .userService(oauth2UserService)
+                    .oauth2Login()
+                    .loginPage("/app/login")
+                    .userInfoEndpoint()
+                        .userService(oauth2UserService)
+                    .and()
+                        .successHandler(oauthLoginSuccessHandler)
                 .and()
-                .successHandler(oauthLoginSuccessHandler)
+                    .logout().logoutSuccessUrl("/app/logout").permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/app/logout").permitAll();
-
+                    .exceptionHandling().accessDeniedPage("/403");
     }
-
-
 
     @Autowired
     private CustomOAuth2UserService oauth2UserService;

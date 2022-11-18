@@ -13,7 +13,8 @@ spring:
             client-id: b9ac03e0-8b5e-4c38-865d-1c819e894e7a
             client-secret: RnS8Q~ni9LNfJlZfUrpR8Mshu91nfBwA4KI1XcBo
             authorization-grant-type: authorization_code
-            redirect-uri: '{baseUrl}/login/oauth2/code/vhp-client'
+            redirect-uri: '{baseUrl}/login-success'
             scope: openid,profile
 server:
   forward-headers-strategy: native
+  port: 8080

@@ -4,7 +4,6 @@ import com.vhp.myapp.service.CustomOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class HomeController {
@@ -23,5 +22,14 @@ public class HomeController {
     @GetMapping( "/hello" )
     public String home() {
         return "hello";
+    }
+
+    @GetMapping( "/login-success")
+    public String LoginSucess() {
+        return "loginSuccess";
+    }
+    @GetMapping("/403")
+    public String Error() {
+        return "403";
     }
 }
